@@ -14,35 +14,14 @@ ofxYahooWeather::ofxYahooWeather(){};
 ofxYahooWeather::~ofxYahooWeather(){};
 
 //  basic functions
-void ofxYahooWeather::setup(unsigned int targetWOEID, char temperatureUnit, unsigned int updateIntervalSeconds)
-{
-    woeid = targetWOEID;
-    tempUnit = temperatureUnit;
-    intervalSeconds = updateIntervalSeconds;
-    url = "http://weather.yahooapis.com/forecastrss?w=" + ofToString(woeid) + "&u=" + ofToString(tempUnit);
-    
-    update();
-}
-
 void ofxYahooWeather::setup(unsigned int targetWOEID, char temperatureUnit)
 {
     woeid = targetWOEID;
     tempUnit = temperatureUnit;
     url = "http://weather.yahooapis.com/forecastrss?w=" + ofToString(woeid) + "&u=" + ofToString(tempUnit);
-    
-    update();
 }
 
-void ofxYahooWeather::setup(unsigned int targetWOEID)
-{
-    woeid = targetWOEID;
-    tempUnit = 'c';
-    url = "http://weather.yahooapis.com/forecastrss?w=" + ofToString(woeid) + "&u=" + ofToString(tempUnit);
-    
-    update();
-}
-
-void ofxYahooWeather::update()
+void ofxYahooWeather::refresh()
 {
     urlReceiving = ofLoadURL(url);
     responseData = urlReceiving.data;
@@ -90,7 +69,7 @@ void ofxYahooWeather::update()
             
             pNode = itr.nextNode();
         }
-        ofLogNotice("Weather Data Updated!");
+        ofLogVerbose("Weather Data Updated!");
     }
     catch(Poco::Exception &exc){
         ofLogNotice(ofToString(exc.displayText()));
@@ -102,16 +81,12 @@ void ofxYahooWeather::resetWOEID(unsigned int targetWOEID)
 {
     woeid = targetWOEID;
     url = "http://weather.yahooapis.com/forecastrss?w=" + ofToString(woeid) + "&u=" + ofToString(tempUnit);
-    
-    update();
 }
 
 void ofxYahooWeather::resetTempUnit(char temperatureUnit)
 {
     tempUnit = temperatureUnit;
     url = "http://weather.yahooapis.com/forecastrss?w=" + ofToString(woeid) + "&u=" + ofToString(tempUnit);
-    
-    update();
 }
 
 //  functions to get values

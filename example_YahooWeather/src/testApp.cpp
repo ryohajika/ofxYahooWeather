@@ -56,7 +56,7 @@ void testApp::mouseReleased(int x, int y, int button){
     
     //In this case, the weather information will be updated by mouse releasing.
     
-    weather.update();
+    weather.refresh();
     ofLogNotice(weather.getTitileOfWeatherInfo());
     ofLogNotice(weather.getCityName() + ", " + weather.getCountryName() + ": " + weather.getWeatherCondition());
     

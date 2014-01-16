@@ -20,11 +20,8 @@ class ofxYahooWeather {
         /*  basic functions */
         //targetWOEID : WOEID
         //temperatureUnit : 'f' or 'c' (Fahrenheit or Celsius)
-        //updateIntervalSeconds : undefined!!!
-        void setup(unsigned int targetWOEID, char temperatureUnit, unsigned int updateIntervalSeconds);     //undefined!!!
-        void setup(unsigned int targetWOEID, char temperatureUnit);
-        void setup(unsigned int targetWOEID);
-        void update();
+        void setup(unsigned int targetWOEID, char temperatureUnit = 'c');
+        void refresh();
     
         /*  change parameters   */
         void resetWOEID(unsigned int targetWOEID);
@@ -89,7 +86,7 @@ class ofxYahooWeather {
         string getTitileOfWeatherInfo();    //like: Yahoo! Weather for Osaka-shi, JP
     
     private:
-        unsigned int woeid, intervalSeconds;
+        unsigned int woeid;
         char tempUnit;
         string url;
     
