@@ -65,12 +65,18 @@ void ofxYahooWeather::refresh()
                     if (switchBooleanHasAttributes) dataContainer.push_back(pNode->attributes()->item(j)->nodeValue());
                 }
                 switchBooleanHasAttributes = false;
+
             }
             //////////
             
             pNode = itr.nextNode();
         }
         ofLogVerbose("Weather Data Updated!");
+#ifdef TARGET_WIN32
+        for (int j=1; j<dataContainer.size(); j++) {
+            dataContainer[j-1]=dataContainer[j];
+        }
+#endif
     }
     catch(Poco::Exception &exc){
         ofLogNotice(ofToString(exc.displayText()));
@@ -98,222 +104,221 @@ string ofxYahooWeather::getURL()
 
 float ofxYahooWeather::getLongtitude()
 {
-    return ofToFloat(dataContainer.at(20));
+    return ofToFloat(dataContainer.at(19));
 }
 
 float ofxYahooWeather::getLatitude()
 {
-    return ofToFloat(dataContainer.at(19));
+    return ofToFloat(dataContainer.at(18));
 }
 
 int ofxYahooWeather::getWindTemperature()
 {
-    return ofToInt(dataContainer.at(10));
+    return ofToInt(dataContainer.at(9));
 }
 
 float ofxYahooWeather::getWindSpeed()
 {
-    return ofToFloat(dataContainer.at(12));
+    return ofToFloat(dataContainer.at(11));
 }
 
 int ofxYahooWeather::getWindDirection()
 {
-    return ofToInt(dataContainer.at(11));
+    return ofToInt(dataContainer.at(10));
 }
 
 string ofxYahooWeather::getCityName()
 {
-    return dataContainer.at(3);
+    return dataContainer.at(2);
 }
 
 string ofxYahooWeather::getCountryName()
 {
-    return dataContainer.at(5);
+    return dataContainer.at(4);
 }
 
 string ofxYahooWeather::getRegionName()
 {
-    return dataContainer.at(4);
+    return dataContainer.at(3);
 }
 
 int ofxYahooWeather::getHumidity()
 {
-    return ofToInt(dataContainer.at(13));
+    return ofToInt(dataContainer.at(12));
 }
 
 float ofxYahooWeather::getVisibleDistance()
 {
-    return ofToFloat(dataContainer.at(14));
+    return ofToFloat(dataContainer.at(13));
 }
 
 float ofxYahooWeather::getPressure()
 {
-    return ofToFloat(dataContainer.at(15));
+    return ofToFloat(dataContainer.at(14));
 }
 
 
 int ofxYahooWeather::getRising()
 {
-    return ofToInt(dataContainer.at(16));
+    return ofToInt(dataContainer.at(15));
 }
 
 string ofxYahooWeather::getSunrise()
 {
-    return dataContainer.at(17);
+    return dataContainer.at(16);
 }
 
 string ofxYahooWeather::getSunset()
 {
-    return dataContainer.at(18);
+    return dataContainer.at(17);
 }
 
 int ofxYahooWeather::getTemperature()
 {
-    return ofToInt(dataContainer.at(23));
+    return ofToInt(dataContainer.at(22));
 }
 
 string ofxYahooWeather::getWeatherCondition()
 {
-    return dataContainer.at(21);
+    return dataContainer.at(20);
 }
 
 int ofxYahooWeather::getWeatherConditionCode()
 {
-    return ofToInt(dataContainer.at(22));
+    return ofToInt(dataContainer.at(21));
 }
 
 string ofxYahooWeather::getLastUpdated()
 {
-    return dataContainer.at(2);
+    return dataContainer.at(1);
 }
 
 int ofxYahooWeather::getTemperatureLowTomorrow()
 {
-    return ofToInt(dataContainer.at(33));
+    return ofToInt(dataContainer.at(32));
 }
 
 int ofxYahooWeather::getTemperatureHighTomorrow()
 {
-    return ofToInt(dataContainer.at(34));
+    return ofToInt(dataContainer.at(33));
 }
 
 string ofxYahooWeather::getWeatherConditionTomorrow()
 {
-    return dataContainer.at(35);
+    return dataContainer.at(34);
 }
 
 int ofxYahooWeather::getWeatherConditionCodeTomorrow()
 {
-    return ofToInt(dataContainer.at(36));
+    return ofToInt(dataContainer.at(35));
 }
 
 string ofxYahooWeather::getWeekdayTomorrow()
 {
-    return dataContainer.at(31) + ", " + dataContainer.at(32);
+    return dataContainer.at(30) + ", " + dataContainer.at(31);
 }
 
 int ofxYahooWeather::getTemperatureLowDayAfterTomorrow()
 {
-    return ofToInt(dataContainer.at(39));
+    return ofToInt(dataContainer.at(38));
 }
 
 int ofxYahooWeather::getTemperatureHighDayAfterTomorrow()
 {
-    return ofToInt(dataContainer.at(40));
+    return ofToInt(dataContainer.at(39));
 }
 
 string ofxYahooWeather::getWeatherConditionDayAfterTomorrow()
 {
-    return dataContainer.at(41);
+    return dataContainer.at(40);
 }
 
 int ofxYahooWeather::getWeatherConditionCodeDayAfterTomorrow()
 {
-    return ofToInt(dataContainer.at(42));
+    return ofToInt(dataContainer.at(41));
 }
 
 string ofxYahooWeather::getWeekdayDayAfterTomorrow()
 {
-    return dataContainer.at(37) + ", " + dataContainer.at(38);
+    return dataContainer.at(36) + ", " + dataContainer.at(37);
 }
 
 //additions
 int ofxYahooWeather::getTemperatureLowThreeDaysLater()
 {
-    return ofToInt(dataContainer.at(45));
+    return ofToInt(dataContainer.at(44));
 }
 
 int ofxYahooWeather::getTemperatureHighThreeDaysLater()
 {
-    return ofToInt(dataContainer.at(46));
+    return ofToInt(dataContainer.at(45));
 }
 
 string ofxYahooWeather::getWeatherConditionThreeDaysLater()
 {
-    return dataContainer.at(47);
+    return dataContainer.at(46);
 }
 
 int ofxYahooWeather::getWeatherConditionCodeThreeDaysLater()
 {
-    return ofToInt(dataContainer.at(48));
+    return ofToInt(dataContainer.at(47));
 }
 
 string ofxYahooWeather::getWeekdayThreeDaysLater()
 {
-    return dataContainer.at(43) + ", " + dataContainer.at(44);
+    return dataContainer.at(42) + ", " + dataContainer.at(43);
 }
 
 
 int ofxYahooWeather::getTemperatureLowFourDaysLater()
 {
-    return ofToInt(dataContainer.at(51));
+    return ofToInt(dataContainer.at(50));
 }
 
 int ofxYahooWeather::getTemperatureHighFourDaysLater()
 {
-    return ofToInt(dataContainer.at(52));
+    return ofToInt(dataContainer.at(51));
 }
 
 string ofxYahooWeather::getWeatherConditionFourDaysLater()
 {
-    return dataContainer.at(53);
+    return dataContainer.at(52);
 }
 
 int ofxYahooWeather::getWeatherConditionCodeFourDaysLater()
 {
-    return ofToInt(dataContainer.at(54));
+    return ofToInt(dataContainer.at(53));
 }
 
 string ofxYahooWeather::getWeekdayFourDaysLater()
 {
-    return dataContainer.at(49) + ", " + dataContainer.at(50);
+    return dataContainer.at(48) + ", " + dataContainer.at(49);
 }
 
 
 string ofxYahooWeather::getTempUnit()
 {
-    return dataContainer.at(6);
+    return dataContainer.at(5);
 }
 
 string ofxYahooWeather::getDistanceUnit()
 {
-    return dataContainer.at(7);
+    return dataContainer.at(6);
 }
 
 string ofxYahooWeather::getPressureUnit()
 {
-    return dataContainer.at(8);
+    return dataContainer.at(7);
 }
 
 string ofxYahooWeather::getSpeedUnit()
 {
-    return dataContainer.at(9);
+    return dataContainer.at(8);
 }
 
 string ofxYahooWeather::getTitileOfWeatherInfo()
 {
-    return dataContainer.at(1);
+    return dataContainer.at(0);
 }
-
 
 
