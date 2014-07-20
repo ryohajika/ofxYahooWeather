@@ -43,7 +43,7 @@ class ofxYahooWeather {
     
         /*  get values  */
         string getURL();
-        float getLongtitude();
+        float getLongitude();
         float getLatitude();
         int getWindTemperature();
         float getWindSpeed();
