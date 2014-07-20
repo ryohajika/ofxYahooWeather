@@ -102,7 +102,7 @@ string ofxYahooWeather::getURL()
     return url;
 }
 
-float ofxYahooWeather::getLongtitude()
+float ofxYahooWeather::getLongitude()
 {
     return ofToFloat(dataContainer.at(19));
 }
