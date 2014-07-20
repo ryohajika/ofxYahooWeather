@@ -19,6 +19,7 @@ void ofxYahooWeather::setup(unsigned int targetWOEID, char temperatureUnit)
     woeid = targetWOEID;
     tempUnit = temperatureUnit;
     url = "http://weather.yahooapis.com/forecastrss?w=" + ofToString(woeid) + "&u=" + ofToString(tempUnit);
+	switchBooleanHasAttributes=false;
 }
 
 void ofxYahooWeather::refresh()
@@ -64,12 +65,18 @@ void ofxYahooWeather::refresh()
                     if (switchBooleanHasAttributes) dataContainer.push_back(pNode->attributes()->item(j)->nodeValue());
                 }
                 switchBooleanHasAttributes = false;
+
             }
             //////////
             
             pNode = itr.nextNode();
         }
         ofLogVerbose("Weather Data Updated!");
+#ifdef TARGET_WIN32
+        for (int j=1; j<dataContainer.size(); j++) {
+            dataContainer[j-1]=dataContainer[j];
+        }
+#endif
     }
     catch(Poco::Exception &exc){
         ofLogNotice(ofToString(exc.displayText()));
@@ -97,12 +104,12 @@ string ofxYahooWeather::getURL()
 
 float ofxYahooWeather::getLongtitude()
 {
-    return ofToFloat(dataContainer.at(18));
+    return ofToFloat(dataContainer.at(19));
 }
 
 float ofxYahooWeather::getLatitude()
 {
-    return ofToFloat(dataContainer.at(19));
+    return ofToFloat(dataContainer.at(18));
 }
 
 int ofxYahooWeather::getWindTemperature()
@@ -313,6 +320,5 @@ string ofxYahooWeather::getTitileOfWeatherInfo()
 {
     return dataContainer.at(0);
 }
-
 
 
