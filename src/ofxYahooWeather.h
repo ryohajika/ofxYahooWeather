@@ -11,6 +11,20 @@
 
 #include "ofMain.h"
 
+#define MILWAUKEE_WOEID 2451822
+#define CHICAGO_WOEID 2379574
+#define NEW_YORK_WOEID 2459115
+#define LOS_ANGELES_WOEID 2442047
+#define HOUSTON_WOEID 2424766
+#define SAN_FRANSISCO_WOEID 2487956
+#define PHILADELPHIA_WOEID 2471217
+#define LONDON_WOEID 44418
+#define PARIS_WOEID 615702
+#define FAHRENHEIT 'f'
+#define CELSIUS 'c'
+
+
+
 class ofxYahooWeather {
     
     public:
@@ -29,7 +43,7 @@ class ofxYahooWeather {
     
         /*  get values  */
         string getURL();
-        float getLongtitude();
+        float getLongitude();
         float getLatitude();
         int getWindTemperature();
         float getWindSpeed();
@@ -99,6 +113,6 @@ class ofxYahooWeather {
         Poco::XML::Node* pNode;
         Poco::XML::Node* pParentNode;
     
-        bool switchBoolean, switchBooleanHasAttributes = false;
+        bool switchBoolean, switchBooleanHasAttributes;
     
 };
